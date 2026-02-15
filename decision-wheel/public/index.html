@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decision Wheel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🎡 Decision Wheel</h1>
+      <p class="tagline">Add options, spin, and let fate decide.</p>
+    </header>
+
+    <section class="add-option">
+      <input type="text" id="optionInput" placeholder="Add an option..." maxlength="80" />
+      <button type="button" id="addBtn">Add</button>
+    </section>
+
+    <section class="options-list" id="optionsList">
+      <h2>Options</h2>
+      <ul id="options"></ul>
+      <p class="empty" id="emptyMsg">No options yet. Add a few above!</p>
+    </section>
+
+    <section class="wheel-section">
+      <div class="wheel-container" id="wheelContainer">
+        <div class="wheel" id="wheel">
+          <svg class="wheel-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="wheel-center"></div>
+        <div class="pointer">▼</div>
+      </div>
+      <button type="button" class="spin-btn" id="spinBtn" disabled>Spin</button>
+    </section>
+
+    <section class="result" id="resultSection">
+      <p class="result-label">Result</p>
+      <p class="result-value" id="resultValue">—</p>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

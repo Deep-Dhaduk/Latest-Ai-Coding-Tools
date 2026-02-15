@@ -1,0 +1,4 @@
+node_modules
+options.json
+.firebaserc
+functions/node_modules

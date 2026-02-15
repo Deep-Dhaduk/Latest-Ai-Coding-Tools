@@ -1,0 +1,256 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --accent: #e94560;
+  --accent-hover: #ff6b6b;
+  --text: #eaeaea;
+  --muted: #a0a0a0;
+  --wheel-segments: 8;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.app {
+  max-width: 420px;
+  width: 100%;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.tagline {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.add-option {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+#optionInput {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid var(--surface);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+#optionInput:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+#addBtn {
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#addBtn:hover {
+  background: var(--accent-hover);
+}
+
+.options-list {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.options-list h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.options-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.options-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.95rem;
+}
+
+.options-list li:last-child {
+  border-bottom: none;
+}
+
+.options-list .remove {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.options-list .remove:hover {
+  color: var(--accent);
+}
+
+.empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.wheel-section {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.wheel-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1rem;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: visible;
+  border: 4px solid var(--accent);
+  transition: transform 0.1s linear;
+}
+
+.wheel .wheel-svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.wheel .wheel-svg text {
+  fill: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: rgba(0,0,0,0.4);
+  stroke-width: 2px;
+}
+
+.wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  background: var(--bg);
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  z-index: 2;
+}
+
+.pointer {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  margin-left: -10px;
+  font-size: 20px;
+  color: var(--accent);
+  z-index: 3;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
+
+.spin-btn {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.spin-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.spin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.result {
+  text-align: center;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 2px dashed var(--accent);
+}
+
+.result-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.result-value {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-height: 1.5em;
+}
+
+.result-value.reveal {
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.wheel.spinning {
+  transition: transform 3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
