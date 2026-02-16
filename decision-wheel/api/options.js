@@ -1,8 +1,9 @@
-const { kv } = require('@vercel/kv');
+const { kv } = require('./lib/kv');
 
 const KEY = 'wheel_options';
 
 async function getOptions() {
+  if (!kv) return [];
   try {
     const data = await kv.get(KEY);
     return Array.isArray(data) ? data : [];
@@ -12,7 +13,7 @@ async function getOptions() {
 }
 
 async function setOptions(options) {
-  await kv.set(KEY, options);
+  if (kv) await kv.set(KEY, options);
 }
 
 module.exports = async function handler(req, res) {

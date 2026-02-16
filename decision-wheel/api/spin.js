@@ -1,4 +1,4 @@
-const { kv } = require('@vercel/kv');
+const { kv } = require('./lib/kv');
 
 const KEY = 'wheel_options';
 
@@ -7,11 +7,15 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
   let options;
-  try {
-    const data = await kv.get(KEY);
-    options = Array.isArray(data) ? data : [];
-  } catch {
+  if (!kv) {
     options = [];
+  } else {
+    try {
+      const data = await kv.get(KEY);
+      options = Array.isArray(data) ? data : [];
+    } catch {
+      options = [];
+    }
   }
 
   if (options.length === 0) return res.status(400).json({ error: 'Add at least one option first' });

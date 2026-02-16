@@ -50,3 +50,19 @@ Open it and use the wheel; options are saved in Vercel KV.
 - **Vercel KV:** Free tier includes a limited amount of storage and commands; the Decision Wheel stays within that.
 
 No credit card needed for the free tier. You only need to add a card if you choose a paid plan later.
+
+---
+
+## Options not saving? (Database connection)
+
+1. **Check env vars**  
+   In Vercel: **Project** → **Settings** → **Environment Variables**. You should see **KV_REST_API_URL** and **KV_REST_API_TOKEN** (or **STORAGE_KV_REST_API_URL** / **STORAGE_KV_REST_API_TOKEN** if you used a custom prefix when connecting). If they’re missing, the project isn’t linked to the Redis store.
+
+2. **Reconnect the store**  
+   Go to **Storage** → open your **decisio-wheel** (Upstash Redis) store → **Connect Project** → select **latest-ai-coding-tools** and connect. Then **Redeploy** the project once.
+
+3. **Redeploy**  
+   **Deployments** → **⋮** on the latest deployment → **Redeploy**. New env vars only apply after a new deployment.
+
+4. **Check runtime logs**  
+   **Deployments** → open a deployment → **Runtime Logs**. Try adding an option in the app and see if any errors appear (e.g. connection or auth).
